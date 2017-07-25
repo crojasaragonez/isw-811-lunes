@@ -17,7 +17,7 @@ var Clicks = {
   }
 };
 
-var refresh = function () {
+var refresh_db = function () {
   Clicks.getData().done(function (json) {
     json.clicks.forEach(function(click) {
       id = click.id;
@@ -28,17 +28,17 @@ var refresh = function () {
 };
 
 $(document).ready(function() {
-  refresh();
+  refresh_db();
 
   $('#clickdb').click(function(event){
     if(id==0){
-      Clicks.insert({count:1}).done(refresh);
+      Clicks.insert({count:1}).done(refresh_db);
       return;
     }
     count++;
-    Clicks.update(id, {count: count}).done(refresh);
+    Clicks.update(id, {count: count}).done(refresh_db);
   });
   $('#click_reset_db').click(function(event){
-    Clicks.update(id, {count: 0}).done(refresh);
+    Clicks.update(id, {count: 0}).done(refresh_db);
   });
 })
